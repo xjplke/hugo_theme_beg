@@ -3,11 +3,11 @@
 
   <section class="panel panel-default">
     <div class="panel-heading">
-      <div class="panel-title">LATESTS</div>
+      <div class="panel-title">最新</div>
     </div>
     <div class="list-group">
       {{ range first 10 .Site.RegularPages }}
-      <a href="{{ .Permalink }}" class="list-group-item">{{ .Title }}</a>
+      <a href="{{ .Permalink }}" class="list-group-item">{{ .Title }}--{{ dateFormat "Jan 2, 2006" .Date }}</a>
       {{ end }}
     </div>
   </section>
@@ -15,11 +15,11 @@
   {{ range $key, $value := .Site.Taxonomies }}
   <section class="panel panel-default">
     <div class="panel-heading">
-      <div class="panel-title">{{ $key | singularize | upper }}</div>
+      <div class="panel-title">{{ index $.Site.Params.Taxonomiesmap $key}}<!--{{ $key | singularize | upper}}--></div>
     </div>
     <div class="list-group">
       {{ range first 10 $value.ByCount }}
-      <a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}" class="list-group-item">{{ .Name }}</a>
+      <a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}/" class="list-group-item">{{ .Name }}</a>
       {{ end }}
     </div>
   </section>
